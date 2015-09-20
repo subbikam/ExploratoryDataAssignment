@@ -57,24 +57,6 @@ median(daily_steps$steps)
 
 ```r
 library(plyr)
-```
-
-```
-## -------------------------------------------------------------------------
-## You have loaded plyr after dplyr - this is likely to cause problems.
-## If you need functions from both plyr and dplyr, please load plyr first, then dplyr:
-## library(plyr); library(dplyr)
-## -------------------------------------------------------------------------
-## 
-## Attaching package: 'plyr'
-## 
-## The following objects are masked from 'package:dplyr':
-## 
-##     arrange, count, desc, failwith, id, mutate, rename, summarise,
-##     summarize
-```
-
-```r
 interval_avg<-aggregate(steps ~ interval, data = activity_clean, mean)
 
 qplot(x=interval, y=steps, data=interval_avg, geom = "line",
@@ -110,6 +92,7 @@ sum(!complete.cases(activity))
 ```
 
 ##Filling NA values with averages for a particular interval
+The strategy adopted is to fill NA values with average value of the steps for that interval across all days
 
 ```r
 activity_imputed<-activity ## create a copy of the dataset
@@ -174,7 +157,7 @@ for (i in 1:nrow(activity_imputed))
         }
 ```
 
-##During the weekend, the person is busier during later prt of the day. During weekdays, the person is busy during first half of the day.
+##Time series plot with modified dataset
 
 
 ```r
@@ -185,3 +168,4 @@ qplot(interval, steps, data = imputed_steps_by_interval, type = 'l',geom=c("line
 
 ![plot of chunk unnamed-chunk-13](figure/unnamed-chunk-13-1.png) 
 
+Inference: During the weekend, the person is busier during later prt of the day. During weekdays, the person is busy during first half of the day.

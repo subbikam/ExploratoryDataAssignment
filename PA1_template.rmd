@@ -58,6 +58,7 @@ sum(!complete.cases(activity))
 ```
 
 ##Filling NA values with averages for a particular interval
+The strategy adopted is to fill NA values with average value of the steps for that interval across all days
 ```{r}
 
 
@@ -116,7 +117,7 @@ for (i in 1:nrow(activity_imputed))
 
 ```
 
-##During the weekend, the person is busier during later prt of the day. During weekdays, the person is busy during first half of the day.
+##Time series plot with modified dataset
 
 ```{r}
 imputed_steps_by_interval <- aggregate(steps ~ interval + day_flag, activity_imputed, mean)
@@ -125,3 +126,4 @@ qplot(interval, steps, data = imputed_steps_by_interval, type = 'l',geom=c("line
 
 ```
 
+Inference: During the weekend, the person is busier during later prt of the day. During weekdays, the person is busy during first half of the day.
